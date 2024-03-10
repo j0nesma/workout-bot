@@ -8,7 +8,7 @@ import {
 import { logger } from "./logger";
 import { Message } from "@telegraf/types";
 
-const bot = new Telegraf("6806733540:AAGiXOtlr6sJPNC93ZVuu3gCqhJgmmfdOGw");
+const bot = new Telegraf("<API-KEY>");
 
 bot.start((ctx) => ctx.reply("Welcome! To start a workout use /workout"));
 

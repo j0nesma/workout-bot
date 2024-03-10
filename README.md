@@ -24,3 +24,5 @@ Export workouts to .csv file
 ## Todo
 Add a Hot reload this is miserable 
 
+Add env file for api key
+
