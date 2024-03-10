@@ -7,8 +7,10 @@ import {
 } from "./constants";
 import { logger } from "./logger";
 import { Message } from "@telegraf/types";
+import dotenv from 'dotenv'; 
 
-const bot = new Telegraf("<API-KEY>");
+dotenv.config()
+const bot = new Telegraf(process.env.BOT_API_TOKEN!);
 
 bot.start((ctx) => ctx.reply("Welcome! To start a workout use /workout"));
 
@@ -31,9 +33,7 @@ bot.command("workout", (ctx) => {
   }
 });
 
-bot.command("add_exercise", (ctx) => {
-  // ctx.
-});
+bot.command("add_exercise", (ctx) => {});
 
 bot.command("stop", (ctx) => {
   const userId = ctx?.from.id;
@@ -49,6 +49,8 @@ bot.on("message", async (ctx) => {
 bot.launch({
   allowedUpdates: ["message", "callback_query"],
 });
+
+
 logger.info("Bot started...");
 
 // Enable graceful stop
