@@ -6,8 +6,8 @@ import {
   WORKOUT_IN_PROGRESS_ERROR_REPLY,
 } from "./constants";
 import { logger } from "./logger";
-import { Message } from "@telegraf/types";
 import dotenv from 'dotenv'; 
+import { handleMessage } from "./messageHandler";
 
 dotenv.config()
 const bot = new Telegraf(process.env.BOT_API_TOKEN!);
@@ -43,7 +43,7 @@ bot.command("stop", (ctx) => {
 });
 
 bot.on("message", async (ctx) => {
-  ctx.reply(`Your answer was: ${(ctx.message as Message.TextMessage)!.text!}`);
+  handleMessage(ctx);
 });
 
 bot.launch({
