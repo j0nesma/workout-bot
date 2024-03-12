@@ -1,11 +1,12 @@
 import { WORKING_OUT } from "./constants";
 import { beforeEach, describe, it, expect, test, vi } from "vitest";
-import { State, getStatus, setStatus, states } from "./status";
+import { getStatus, setStatus, users } from "./user";
 import { Context, Telegram } from "telegraf";
+import { IUser } from "./interfaces/userInterface";
 
-describe("Status", () => {
+describe("Users", () => {
   beforeEach(()=>{
-    states.length = 0;
+    users.length = 0;
   }) 
   describe("getStatus", () => {
     it("should return a users state", () => {
@@ -13,12 +14,12 @@ describe("Status", () => {
     })
 
     it("should return undefined if no state", () => {
-      const state:State = {
+      const user:IUser= {
         userId:123,
         status:"WORKING_OUT"
       }
-      states.push(state);
-      expect(getStatus(123)).toEqual(state);
+      users.push(user);
+      expect(getStatus(123)).toEqual(user);
     })
   });
 
@@ -27,12 +28,12 @@ describe("Status", () => {
       const status = "WORKING_OUT1";
       const userId = 123;
 
-      expect(states.length).toEqual(0);
+      expect(users.length).toEqual(0);
 
       setStatus(userId, status);
       
-      expect(states.length).toEqual(1);
-      expect(states.filter(state => state.userId === userId)[0]).toEqual({
+      expect(users.length).toEqual(1);
+      expect(users.filter(state => state.userId === userId)[0]).toEqual({
         userId,
         status
       })
@@ -41,18 +42,18 @@ describe("Status", () => {
     it("should update a state if user exists", () => {
       const status = "WORKING_OUT1";
       const userId = 123;
-      const state:State = {
+      const state:IUser = {
         userId:123,
         status:"WORKING_OUT"
       }
-      states.push(state);
+      users.push(state);
 
-      expect(states.length).toEqual(1);
+      expect(users.length).toEqual(1);
 
       setStatus(userId, status);
       
-      expect(states.length).toEqual(1);
-      expect(states.filter(state => state.userId === userId)[0]).toEqual({
+      expect(users.length).toEqual(1);
+      expect(users.filter(state => state.userId === userId)[0]).toEqual({
         userId,
         status
       })

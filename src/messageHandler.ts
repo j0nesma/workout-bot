@@ -1,7 +1,7 @@
 // This will handle any messages from the user that isnt a command
 
 import { Message } from "@telegraf/types";
-import { getStatus } from "./status";
+import { getStatus } from "./user";
 import { WORKING_OUT } from "./constants";
 
 
